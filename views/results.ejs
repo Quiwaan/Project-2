@@ -1,1 +1,8 @@
-<%=result.body %>
+<div>
+	<% result.artists.items.forEach(function(item) { %>
+		<h2>album name</h2>
+		<div class="img-container">
+     		<img src="<%= item.images[0].url %>">
+    	</div>
+	<% }) %>
+</div>

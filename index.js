@@ -16,29 +16,49 @@ app.use(express.urlencoded({ extended: false }));
 
 
 var spotifyApi = new SpotifyWebApi({
-	clientId: 'd459153dd3f7453c826a6073f648cfbe',
-	clientSecret: '938e00570fa1497a8b26925c01ab7eaa'
+  clientId: 'd459153dd3f7453c826a6073f648cfbe',
+  clientSecret: '938e00570fa1497a8b26925c01ab7eaa'
 });
 
-spotifyApi.setAccessToken('BQB5fkUc1-dsDy2PKFYv9JeUZn7d80wdtHWIbcCR_RsMXULHON9zDgnfElIJgE1CwGj4U3a4qUFBJA4wfNQ');
-  
+// Retrieve an access token
+spotifyApi
+  .clientCredentialsGrant()
+  .then(function(data) {
+    // Set the access token on the API object so that it's used in all future requests
+    spotifyApi.setAccessToken(data.body['access_token']);
+  })
 
 app.get('/', function(req, res){
 	res.render('search-form');
 })
 
-app.post('/search', function(req, res){
-	spotifyApi.searchArtist(req.body.artist.trim())
-	.then(result => {
-		res.render('results', { results: result.body });
-		console.log(results)
+// app.post('/', function(req, res){
+// 	console.log(req.body.artist);
+// 	spotifyApi.searchArtist(req.body.artist.trim())
+// 	.then(result => {
+// 		res.render('results', { results: result.body });
+// 		console.log(results)
+// 	})
+// 	.catch(err => {
+// 		res.render('error', { error: err });
+// 	})
+// });
+
+
+app.post('/', function(req, res){
+	console.log(req.body.artist);
+	spotifyApi.searchArtists(req.body.artist)
+  .then(function(result) {
+  		//res.send(result.body);
+		res.render('results', {result: result.body});
+		
 	})
 	.catch(err => {
-		res.render('error', { error: err });
+		console.log('error', { error: err });
 	})
 });
 
-
+// `
 // request token and start timeout loop
 
 app.listen(3000)
