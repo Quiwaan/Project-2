@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var request = require('request');
 var layouts = require('express-ejs-layouts');
-var parser = require("body-parser");
 var session = require("express-session");
 var SpotifyWebApi = require('spotify-web-api-node');
 
@@ -13,7 +12,7 @@ app.set('view engine', 'ejs');
 // Include any middleware here
 app.use(layouts);
 app.use(express.static('static'));
-app.use(parser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 
 var spotifyApi = new SpotifyWebApi({
@@ -37,9 +36,7 @@ app.post('/search', function(req, res){
 	.catch(err => {
 		res.render('error', { error: err });
 	})
-})
-
-
+});
 
 
 // request token and start timeout loop
