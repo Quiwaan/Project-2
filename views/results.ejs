@@ -1,8 +1,36 @@
 <div>
 	<% result.artists.items.forEach(function(item) { %>
-		<h2>album name</h2>
+		<h2>album name: <%=item.name%> </h2>
 		<div class="img-container">
      		<img src="<%= item.images[0].url %>">
     	</div>
+    	
+
+<form method="GET" action="/artist">
+        <input hidden type="text" name="name" value="<%= item.id %>">
+        <button class="btn btn-primary" type="submit">Add to Favorite artist</button>
+      </form>
+
+
+
+
+
+<<% for (var i = 0; i < 5; i++) { -%>
+<div class="col s12">
+	<%= %>
+	
+</div>
+	
+<% } -%>
+
+
+
+
+
+
+
+
+
+
 	<% }) %>
 </div>

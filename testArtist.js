@@ -25,12 +25,10 @@ spotifyApi
   .then(function(data) {
     // Set the access token on the API object so that it's used in all future requests
     spotifyApi.setAccessToken(data.body['access_token']);
-
-  spotifyApi.searchArtists('tory lanez')
+})
+  spotifyApi.getArtistTopTracks('2hazSY4Ef3aB9ATXW7F5w3')
   .then(function(data) {
-    console.log('Search artists by "gucci"', data.body);
+    console.log('Artist information', data.body);
   }, function(err) {
     console.error(err);
   });
-
-})
