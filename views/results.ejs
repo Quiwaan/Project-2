@@ -1,13 +1,19 @@
 <div>
-	<% artist.artists.items.forEach(function(item) { %>
+	<% artist.artists.items.forEach(function(item, i) { %>
 		<h2>Artist Name: <%=item.name%> </h2>
+		<img src="<%= item.images.length > 0 ? item.images[0].url : '/images/no-image-found.jpg'%>">
+		<p><a href="<%= item.uri %>" class="btn btn-primary" role="button">Open Artist In Spotify</a></p>
+		<form method="GET" action="/artist">
+        <input hidden type="text" name="name" value="<%= item.id %>">
+        <button class="btn btn-primary" type="submit">Add to Favorite artist</button>
+      </form>
 		<div class="img-container">
 </div>
 
 
 <div>
 	<% tracks.forEach(function(track) { %>
-		<h2> Top Single Name: <%= track[5].name %></h2> 
+		<h2> Top Single: <%= track.name %></h2> 
 		<h3>Popularity Number: <%= track.popularity %> </h3>
 		<div class="img-container">
      		<img src="<%= track.album.images[0].url %>">
@@ -23,7 +29,7 @@
 
 <form method="GET" action="/artist">
         <input hidden type="text" name="name" value="<%= item.id %>">
-        <button class="btn btn-primary" type="submit">Add to Favorite artist</button>
+        <button class="btn btn-primary" type="submit">Add to Favorite Tracks</button>
       </form>
 
 
