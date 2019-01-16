@@ -42,8 +42,8 @@ app.post('/', function(req, res){
  		//res.send(artistResult);
  		spotifyApi.getArtistTopTracks(artistResult.body.artists.items[0].id, 'US')
  		.then(function(trackResults){
- 			res.send(trackResults.body);
- 			//res.render('results', { artist: artistResult.body, tracks: trackResults.body });
+ 			//res.send(trackResults.body.tracks);
+ 			res.render('results', { artist: artistResult.body, tracks: trackResults.body.tracks });
  		})
  		.catch(function(err){
  			console.log(err);

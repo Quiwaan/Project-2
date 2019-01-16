@@ -1,9 +1,24 @@
 <div>
-	<% result.artists.items.forEach(function(item) { %>
-		<h2>album name: <%=item.name%> </h2>
+	<% artist.artists.items.forEach(function(item) { %>
+		<h2>Artist Name: <%=item.name%> </h2>
 		<div class="img-container">
-     		<img src="<%= item.images[0].url %>">
-    	</div>
+</div>
+
+
+<div>
+	<% tracks.forEach(function(track) { %>
+		<h2> Top Single Name: <%= track[5].name %></h2> 
+		<h3>Popularity Number: <%= track.popularity %> </h3>
+		<div class="img-container">
+     		<img src="<%= track.album.images[0].url %>">
+</div>
+
+
+    	
+
+
+
+
     	
 
 <form method="GET" action="/artist">
@@ -12,16 +27,10 @@
       </form>
 
 
-
-
-
-<<% for (var i = 0; i < 5; i++) { -%>
-<div class="col s12">
-	<%= %>
 	
 </div>
 	
-<% } -%>
+<% }) -%>
 
 
 
