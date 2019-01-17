@@ -4,6 +4,7 @@ var request = require('request');
 var layouts = require('express-ejs-layouts');
 var session = require("express-session");
 var SpotifyWebApi = require('spotify-web-api-node');
+var db = require("./models");
 
 
 // Tell express what view engine you want to use
@@ -56,26 +57,22 @@ app.post('/', function(req, res){
 });
 
 
-app.get('/', function(req, res){
-	results.findAll().then(function(result){
-		res.render('artist', {result: result.body})
-	})
-			
-	})
+app.get('/artist', function(req, res){
+	db.artist.findAll().then(function(artist){
+		res.render('artist', { artist: artist })
+	})		
+})
 	
 
 
-// app.post('/', function(req, res){
-// 	console.log(req.body.artist);
-// 	spotifyApi.getArtistTopTracks(req.body.tracks)
-//   .then(function(result) {
-//   		res.send(result.body);
-//   		//res.render('results', {result: result.body});
-// 	})
-// 	.catch(err => {
-// 		console.log('error', { error: err });
-// 	})
-// });
+app.post('/artist', function(req, res){
+	db.artist.findOrCreate({
+	  	where: req.body,
+	  })
+	.then(function(back){
+		res.redirect('/artist')
+	})
+})
 
 
 
