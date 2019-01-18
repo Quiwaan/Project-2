@@ -75,6 +75,22 @@ app.post('/artist', function(req, res){
 })
 
 
+app.post('/tracks', function(req, res){
+  db.track.findOrCreate({
+    where: req.body,
+  })
+  .then(function(tracks){
+    res.redirect('/tracks')
+  })
+})
+
+
+app.get('/tracks', function(req, res){
+  db.track.findAll().then(function(track){
+    res.render('tracks', { track: track })
+  })
+})
+
 
 
 

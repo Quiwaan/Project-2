@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   track.associate = function(models) {
     models.track.belongsToMany(models.artist, { through: "userTrack" })
-    models.artist.hasMany(models.track);
+    models.track.belongsTo(models.artist);
   };
   return track;
 };
