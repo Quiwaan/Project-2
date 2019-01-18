@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var request = require('request');
 var flash = require('connect-flash');
+var parser = require('body-parser'); 
 var layouts = require('express-ejs-layouts');
 var SpotifyWebApi = require('spotify-web-api-node');
 var passport = require('./config/passportConfig')
@@ -19,14 +20,14 @@ app.set('view engine', 'ejs');
 app.use(layouts);
 app.use(express.static('static'));
 app.use(express.urlencoded({ extended: false }));
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(session({
   secret: process.env.SESSIONS_SECRET,
   resave: false,
   saveUninitialized: true
 }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use(function(req, res, next){
@@ -154,7 +155,7 @@ setInterval(function() {
 }, 1000);
 
 
-
+app.use('/profile', require('./routes/profiles'))
 app.use('/auth', require('./routes/auth'));
 
 app.listen(3000)

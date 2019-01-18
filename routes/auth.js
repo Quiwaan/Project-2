@@ -7,12 +7,13 @@ router.get('/login', function(req, res){
 	res.render('auth/login');
 })
 
+
 router.get('/signup', function(req, res){
 	res.render('auth/signup', { previousData: null });
 })
 
 
-router.post('/signup', function(req, res, next){
+router.post('/signup', function(req,res){
 	if(req.body.password != req.body.password_verify){
 		req.flash('error', 'passwords must match!');
 		req = deletePassword(req, res);
@@ -27,16 +28,12 @@ router.post('/signup', function(req, res, next){
 	  .spread(function(user, wasCreated){
 	  	console.log('got to promise');
 	  	if(wasCreated){
-	  		passport.authenticate('local', {
-			successRedirect: '/profile',
-			successFlash: 'login successful',
-			failureRedirect: '/auth/login',
-			failureFlash: 'Wrong Creds'
-		})(req, res, next);
+	  		console.log('was created');
+	  		req.flash('success')
+	  		res.redirect('/profile')
 
 	  	} else {
 	  		req.flash('error', 'username already in use')
-	  		res.render('auth/signup', { previousData: req.body, alerts: req.flash() });
 	  	}
 	  })
 	  .catch(function(err){
@@ -57,6 +54,13 @@ router.post('/signup', function(req, res, next){
 	}
 })
 
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/profile',
+	successFlash: 'login successful',
+	failureRedirect: '/auth/login',
+	failureFlash: 'Wrong Creds'
+}));
+
 
 router.get('/logout', function(req, res){
 	req.logout();
@@ -65,17 +69,6 @@ router.get('/logout', function(req, res){
 })
 
 
-// facebook specific routes
-router.get('/facebook', passport.authenticate('facebook', {
-	scope: ['public_profile', 'email']
-}));
-
-router.get('/callback/facebook', passport.authenticate('facebook', {
-	successRedirect: '/profile',
-	successFlash: 'Login successful',
-	failureRedirect: '/auth/login',
-	failureRedirect: "facebook dont know you bro"
-}))
 
 
 module.exports = router;

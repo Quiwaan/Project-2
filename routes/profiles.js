@@ -6,7 +6,11 @@ var isAdmin = require('../middleware/isAdmin');
 
 
 router.get('/', loggedIn, function(req, res){
-	res.render('./profile')
+	res.render('search-form')
+})
+
+router.get('/admins', function(req, res){
+	res.render('admins')
 })
 
 

@@ -1,5 +1,6 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
 var db = require('../models');
 
 //provide serialize/deserialize 
@@ -41,8 +42,6 @@ passport.use(new LocalStrategy({
 	})
 
 }))
-
-
 
 //make sre i can include this module in other pages
 
