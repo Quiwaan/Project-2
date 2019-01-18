@@ -158,7 +158,10 @@ setInterval(function() {
 app.use('/profile', require('./routes/profiles'))
 app.use('/auth', require('./routes/auth'));
 
-app.listen(3000)
+app.listen(process.env.Port || 3000, function(){
+  console.log('Hey yall')
+})
+
 
 
 
