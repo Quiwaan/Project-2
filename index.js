@@ -1,9 +1,14 @@
+require('dotenv').config();
 var express = require('express');
 var app = express();
 var request = require('request');
+var flash = require('connect-flash');
 var layouts = require('express-ejs-layouts');
-var session = require("express-session");
 var SpotifyWebApi = require('spotify-web-api-node');
+var passport = require('./config/passportConfig')
+var session = require('express-session');
+
+
 var db = require("./models");
 
 
@@ -14,6 +19,21 @@ app.set('view engine', 'ejs');
 app.use(layouts);
 app.use(express.static('static'));
 app.use(express.urlencoded({ extended: false }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(session({
+  secret: process.env.SESSIONS_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+
+app.use(function(req, res, next){
+  res.locals.alerts = req.flash();
+  res.locals.user = req.user;
+  next();
+})
 
 
 var spotifyApi = new SpotifyWebApi({
@@ -133,6 +153,9 @@ setInterval(function() {
   }
 }, 1000);
 
+
+
+app.use('/auth', require('./routes/auth'));
 
 app.listen(3000)
 
