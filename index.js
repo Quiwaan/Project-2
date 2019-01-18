@@ -9,7 +9,7 @@ var SpotifyWebApi = require('spotify-web-api-node');
 var passport = require('./config/passportconfig');
 var session = require('express-session');
 
-
+var loggedIn = require('./middleware/loggedIn');
 var db = require("./models");
 
 
@@ -27,7 +27,7 @@ app.use(session({
 }));
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
 
 app.use(function(req, res, next){
@@ -85,25 +85,30 @@ app.get('/artist', function(req, res){
 })
 	
 
-
-app.post('/artist', function(req, res){
-	db.artist.findOrCreate({
-	  	where: req.body,
-	  })
-	.then(function(back){
-		res.redirect('/artist')
-	})
-})
-
-
-app.post('/tracks', function(req, res){
-  db.track.findOrCreate({
+app.post('/artist', loggedIn, function(req, res){
+  db.artist.findOrCreate({
     where: req.body,
-  })
-  .then(function(tracks){
-    res.redirect('/tracks')
-  })
-})
+  }).spread(function(artist, created) {
+    artist.addUsers(req.user.id);
+  }).catch(function(err) {
+    console.log(err);
+  });
+})   
+
+
+
+
+// app.post('/artist', function(req, res){
+// 	db.artist.findOrCreate({
+// 	  	where: req.body,
+// 	  })
+// 	.then(function(back){
+// 		res.redirect('/artist')
+// 	})
+// })
+
+
+
 
 
 app.get('/tracks', function(req, res){
@@ -113,8 +118,15 @@ app.get('/tracks', function(req, res){
 })
 
 
-
-
+app.post('/tracks', loggedIn, function(req, res){
+  db.track.findOrCreate({
+    where: req.body,
+  }).spread(function(track, created) {
+    track.addUsers(req.user.id);
+  }).catch(function(err) {
+    console.log(err);
+  });
+})   
 
 
 

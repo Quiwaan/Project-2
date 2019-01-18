@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     popnum: DataTypes.INTEGER
   }, {});
   track.associate = function(models) {
-    models.track.belongsToMany(models.artist, { through: "userTrack" })
+    models.track.belongsToMany(models.user, { through: "userTrack" })
     models.track.belongsTo(models.artist);
   };
   return track;
