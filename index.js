@@ -6,7 +6,7 @@ var flash = require('connect-flash');
 var parser = require('body-parser'); 
 var layouts = require('express-ejs-layouts');
 var SpotifyWebApi = require('spotify-web-api-node');
-var passport = require('./config/passportConfig')
+var passport = require('./config/passportconfig');
 var session = require('express-session');
 
 
@@ -27,7 +27,7 @@ app.use(session({
 }));
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session())
 
 
 app.use(function(req, res, next){
