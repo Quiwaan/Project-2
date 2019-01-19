@@ -1,0 +1,26 @@
+<h1><%= user.firstname %>'s Favortie Artist's</h1>
+
+
+
+<div class="row">
+	<div class="col s3">
+		<div>
+			<img src="<%= user.image %>">
+		</div>
+		<div>
+			<p><strong>Full Name:</strong> <%= user.firstname %> <%= user.lastname %></p>
+			<p><strong>User Name:</strong> <%= user.username %></p>
+		</div>
+
+
+
+
+
+		<% artists.forEach(function(artistid) { %>
+		<h2>Artist Name: <%=artistid.name%> </h2>
+		<img src="<%=artistid.image%>">
+		<p><a href="<%= artistid.uri %>" class="btn btn-primary" role="button">Open Artist In Spotify</a></p>
+
+
+
+<% }) -%>

@@ -50,7 +50,7 @@ spotifyApi
     spotifyApi.setAccessToken(data.body['access_token']);
   })
 
-app.get('/', function(req, res){
+app.get('/', loggedIn, function(req, res){
 	res.render('search-form');
 })
 
@@ -98,19 +98,6 @@ app.post('/artist', loggedIn, function(req, res){
 
 
 
-// app.post('/artist', function(req, res){
-// 	db.artist.findOrCreate({
-// 	  	where: req.body,
-// 	  })
-// 	.then(function(back){
-// 		res.redirect('/artist')
-// 	})
-// })
-
-
-
-
-
 app.get('/tracks', function(req, res){
   db.track.findAll().then(function(track){
     res.render('tracks', { track: track })
@@ -123,9 +110,9 @@ app.post('/tracks', loggedIn, function(req, res){
     where: req.body,
   }).spread(function(track, created) {
     track.addUsers(req.user.id);
-  }).catch(function(err) {
-    console.log(err);
-  });
+    }).catch(function(err) {
+      console.log(err);
+    });
 })   
 
 
@@ -169,7 +156,7 @@ setInterval(function() {
 
 app.use('/profile', require('./routes/profiles'))
 app.use('/auth', require('./routes/auth'));
-
+app.use('/favs', require('./routes/favs'));
 app.listen(process.env.Port || 3000, function(){
   console.log('Hey yall')
 })

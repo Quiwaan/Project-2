@@ -8,18 +8,16 @@
 <body>
   <nav>
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo right">
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="/" class="brand-logo">Home</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <% if(!user){ %>
-            <li><a href="/">Home</a></li>
             <li><a href="/auth/login">Login</a></li>
             <li><a href="/auth/signup">Signup</a></li>
           <% } else { %>
-            <% if(user.admin) { %>
-              <li><a href="/profile/admins">Admin Page</a></li>
-            <%}%>
             <li><a href="/profile"></a></li>
             <li>Hello, <%= user.firstname %>!</li>
+            <li><a href="/favs/fav-artist">Favorite Artist</a></li>
+            <li><a href="/"></a>Search For Artist</li>
             <li><a href="/auth/logout">Logout</a></li>
           <% } %>
         </ul>
