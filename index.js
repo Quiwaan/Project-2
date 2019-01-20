@@ -8,6 +8,7 @@ var layouts = require('express-ejs-layouts');
 var SpotifyWebApi = require('spotify-web-api-node');
 var passport = require('./config/passportconfig');
 var session = require('express-session');
+var methodOverride = require('method-override');
 
 var loggedIn = require('./middleware/loggedIn');
 var db = require("./models");
@@ -18,6 +19,7 @@ app.set('view engine', 'ejs');
 
 // Include any middleware here
 app.use(layouts);
+app.use(methodOverride('_method'));
 app.use(express.static('static'));
 app.use(express.urlencoded({ extended: false }));
 app.use(session({

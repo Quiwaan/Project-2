@@ -12,13 +12,23 @@ router.get('/fav-artist', loggedIn, function(req, res){
 		console.log("ARTISTS:"+artists);
 		res.render('./favs/fav-artist', { artists: artists })
 	})
-	// db.artist.find({
-	// 	where: req.body,
-	// }).then(function(artist){
-	// 	artist.getUsers().then(function(artistid){
-	// 		res.render('./favs/fav-artist', { artistid: artistid })
-	// 	})
-	// })
 })
+
+
+
+router.get('/fav-tracks', loggedIn, function(req, res){
+	req.user.getTracks().then(function(tracks){
+		console.log("TRACKS:"+tracks);
+		res.render('./favs/fav-tracks', { tracks: tracks })
+	})
+})
+
+
+router.delete('fav-artist/:artist', function(req, res){
+	req.user.removeArtist().then(function(rmArtists){
+		console.log("rmArtists:"+rmArtists)
+	})
+})
+
 
 module.exports = router;

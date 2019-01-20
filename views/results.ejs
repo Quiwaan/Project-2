@@ -21,7 +21,7 @@
      		<img src="<%= track.album.images[0].url %>">
 <form method="Post" action="/tracks">
 	 <input hidden type="text" name="name" value="<%= track.name %>">
-	 	 <input hidden type="text" name="popnum" value="<%= track.popularity %>">
+	 	 <input hidden type="number" name="popnum" value="<%= track.popularity %>">
 	 	 	<input hidden type="text" name="image" value="<%= track.album.images[0].url %>">
 <button class="btn btn-primary" type="submit">Add to Favorite Tracks</button>
 </form>

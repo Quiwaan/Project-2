@@ -14,8 +14,15 @@
 
 
 
-		<% artists.forEach(function(artistid) { %>
-		<h2>Artist Name: <%=artistid.name%> </h2>
-		<img src="<%=artistid.image%>">
-		<p><a href="<%= artistid.uri %>" class="btn btn-primary" role="button">Open Artist In Spotify</a></p>
+
+
+		<% tracks.forEach(function(trackid) { %>
+		<h2>Single Name: <%=trackid.name%> </h2>
+		<h3>Popularity Number: <%= trackid.popularity %> </h3>
+		<div class="img-container">
+		<img src="<%= trackid.image %>">
+		
+
+
+
 <% }) -%>
