@@ -10,18 +10,19 @@
 		<div>
 			<p><strong>Full Name:</strong> <%= user.firstname %> <%= user.lastname %></p>
 			<p><strong>User Name:</strong> <%= user.username %></p>
+</div>
+	</div>
 		</div>
 
 
 
-
-
-		<% tracks.forEach(function(trackid) { %>
+<div>
+	<% tracks.forEach(function(trackid) { %>
 		<h2>Single Name: <%=trackid.name%> </h2>
-		<h3>Popularity Number: <%= trackid.popularity %> </h3>
-		<div class="img-container">
-		<img class="responsive-img" src="<%= trackid.image %>">
-		
+			<h3>Popularity Number: <%= trackid.popularity %> </h3>
+				<div class="img-container">
+					<img class="responsive-img" src="<%= trackid.image %>">
+</div>		
 
 
 

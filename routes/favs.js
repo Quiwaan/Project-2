@@ -24,10 +24,11 @@ router.get('/fav-tracks', loggedIn, function(req, res){
 })
 
 
-router.delete('/fav-artist/:id', function(req, res){ 
-	 db.artist.destroy({
+router.delete('/fav-artist', function(req, res){ 
+	 db.userArtist.destroy({
 	 	where: {
-	 		id: req.body.id
+	 		userId: req.user.id,
+	 		artistId: +req.body.artistId,
 	 	}
 	 })
 	 .then(function(data){
