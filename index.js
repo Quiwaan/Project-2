@@ -129,7 +129,7 @@ var tokenExpirationEpoch;
 setInterval(function() {
   console.log(
     'Time left: ' +
-      Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) +
+      Math.floor(tokenExpirationEpoch - new Date().getTime() / 10000) +
       ' seconds left!'
   );
 
@@ -144,7 +144,7 @@ setInterval(function() {
           new Date().getTime() / 1000 + data.body['expires_in'];
         console.log(
           'Refreshed token. It now expires in ' +
-            Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) +
+            Math.floor(tokenExpirationEpoch - new Date().getTime() / 10000) +
             ' seconds!'
         );
       },
@@ -153,7 +153,7 @@ setInterval(function() {
       }
     );
   }
-}, 1000);
+}, 10000);
 
 
 app.use('/profile', require('./routes/profiles'))
