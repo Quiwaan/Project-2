@@ -10,12 +10,42 @@
 		<div>
 			<p><strong>Full Name:</strong> <%= user.firstname %> <%= user.lastname %></p>
 			<p><strong>User Name:</strong> <%= user.username %></p>
+			<form method="post" action="/fav-artist/1?_method=put">
+  <button type="submit">Update!!</button>
+</form>
 		</div>
+	</div>
+</div>	
 
-
+<div>
 
 		<% artists.forEach(function(artistid) { %>
 		<h2>Artist Name: <%=artistid.name%> </h2>
+		<div class="img-container">
 		<img src="<%=artistid.image%>">
 		<p><a href="<%= artistid.uri %>" class="btn btn-primary" role="button">Open Artist In Spotify</a></p>
+
+</div>	
+
+
+
+<div>
+<% artists.forEach(function(artistid, artists) { %>
+		<h2>Artist Name: <%=artistid.name%> </h2>
+		<div class="img-container">
+		<img src="<%=artistid.image%>">
+
+<form method="POST" action="/fav-artist/<%= artists.id %>?_method=DELETE">
+	<input  type="hidden" name="artistId" value="<%= artists.id %> >">
+	<button class="btn btn-primary delete" type="submit" name="Delete Artist">Delete Artist</button>
+	
+</form>		
+
+
+</div>
+	
+</div>
+
+
+<% }) -%>
 <% }) -%>

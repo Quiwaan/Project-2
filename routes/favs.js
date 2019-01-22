@@ -24,11 +24,49 @@ router.get('/fav-tracks', loggedIn, function(req, res){
 })
 
 
-router.delete('fav-artist/:artist', function(req, res){
-	req.user.removeArtist().then(function(rmArtists){
-		console.log("rmArtists:"+rmArtists)
-	})
+router.delete('/fav-artist/:id', function(req, res){ 
+	 db.artist.destroy({
+	 	where: {
+	 		id: req.body.id
+	 	}
+	 })
+	 .then(function(data){
+	 	res.redirect('./favs/fav-artist')
+	 })
 })
+
+
+router.put('/fav-artist/:id', function(req, res) {
+    models.User
+        .update({
+            name: req.body.name,
+            username: req.body.username
+        }, {
+            where: {
+                id: req.params.userId
+            }
+        }).then(function() {
+            res.redirect('./favs/fav-artist');
+        });
+});
+
+
+// router.delete('/fav-artist', (req, res) => {  
+//   const id = parseInt(req.params.id)
+//   return db.artist.findById(id)
+//     .then((artist) => artist.destroy())
+//     .then(() => res.send({ id }))
+//     .catch((err) => {
+//       console.log('***Error deleting contact', JSON.stringify(err))
+//       res.status(400).send(err)
+//     })
+// });
+	 	
+	
+
+
+
+
 
 
 module.exports = router;

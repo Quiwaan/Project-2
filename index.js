@@ -40,8 +40,8 @@ app.use(function(req, res, next){
 
 
 var spotifyApi = new SpotifyWebApi({
-  clientId: 'd459153dd3f7453c826a6073f648cfbe',
-  clientSecret: '938e00570fa1497a8b26925c01ab7eaa'
+  clientId: process.env.client_Id,
+  clientSecret: process.env.client_Secret
 });
 
 // Retrieve an access token
@@ -68,7 +68,7 @@ app.post('/', function(req, res){
  		.then(function(trackResults){
  			//res.send(trackResults.body.tracks);
  			//res.send(artistResult.body);
- 			res.render('results', { artist: artistResult.body, tracks: trackResults.body.tracks.slice(0,5) });
+ 			res.render('results', { artist: artistResult.body, tracks: trackResults.body.tracks.slice( 0 )});
  		})
  		.catch(function(err){
  			console.log(err);

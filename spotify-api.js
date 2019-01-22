@@ -10,8 +10,8 @@
 var request = require("request"); // "Request" library
 var querystring = require("querystring");
 var cookieParser = require("cookie-parser");
- var client_id = "d459153dd3f7453c826a6073f648cfbe"; // Your client id
-var client_secret = "938e00570fa1497a8b26925c01ab7eaa"; // Your secret
+ var client_id =  process.env.client_Id; // Your client id
+var client_secret = process.env.client_Secret; // Your secret
 var redirect_uri = "http://localhost:3000/callback"; // Your redirect uri
  /**
  * Generates a random string containing numbers and letters
