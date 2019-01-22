@@ -19,14 +19,14 @@
 <div>
 	<% tracks.forEach(function(trackid) { %>
 		<h2>Single Name: <%=trackid.name%> </h2>
-			<h3>Popularity Number: <%= trackid.popularity %> </h3>
+			<h3>Popularity Number: <%= trackid.popnum %> </h3>
 				<div class="img-container">
 					<img class="responsive-img" src="<%= trackid.image %>">
 	<form method="POST" action="fav-tracks?_method=DELETE">
 		<input  type="hidden" name="trackId" value="<%= trackid.id %>">
 		   <button class="btn btn-primary delete" type="submit" name="Delete Artist">Delete Track</button>
 		
-     </form>		
+    </form>		
 </div>		
 
 
