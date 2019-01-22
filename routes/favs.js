@@ -28,11 +28,11 @@ router.delete('/fav-artist', function(req, res){
 	 db.userArtist.destroy({
 	 	where: {
 	 		userId: req.user.id,
-	 		artistId: +req.body.artistId,
+	 		artistId: +req.body.artistId
 	 	}
 	 })
 	 .then(function(data){
-	 	res.redirect('./favs/fav-artist')
+	 	res.redirect('/favs/fav-artist')
 	 })
 })
 
@@ -52,16 +52,6 @@ router.put('/fav-artist/:id', function(req, res) {
 });
 
 
-// router.delete('/fav-artist', (req, res) => {  
-//   const id = parseInt(req.params.id)
-//   return db.artist.findById(id)
-//     .then((artist) => artist.destroy())
-//     .then(() => res.send({ id }))
-//     .catch((err) => {
-//       console.log('***Error deleting contact', JSON.stringify(err))
-//       res.status(400).send(err)
-//     })
-// });
 	 	
 	
 

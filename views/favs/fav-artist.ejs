@@ -23,7 +23,7 @@
 			  <img src="<%=artistid.image%>">
 			   <p><a href="<%= artistid.uri %>" class="btn btn-primary" role="button">Open Artist In Spotify</a></p>
 	<form method="POST" action="fav-artist?_method=DELETE">
-		<input  type="hidden" name="artistId" value="<%= artists.id %>">
+		<input  type="hidden" name="artistId" value="<%= artistid.id %>">
 		   <button class="btn btn-primary delete" type="submit" name="Delete Artist">Delete Artist</button>
 		
      </form>		

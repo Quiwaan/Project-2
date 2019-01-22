@@ -92,6 +92,7 @@ app.post('/artist', loggedIn, function(req, res){
     where: req.body,
   }).spread(function(artist, created) {
     artist.addUsers(req.user.id);
+    res.redirect('/favs/fav-artist')
   }).catch(function(err) {
     console.log(err);
   });
@@ -112,6 +113,7 @@ app.post('/tracks', loggedIn, function(req, res){
     where: req.body,
   }).spread(function(track, created) {
     track.addUsers(req.user.id);
+    res.redirect('/favs/fav-tracks')
     }).catch(function(err) {
       console.log(err);
     });
