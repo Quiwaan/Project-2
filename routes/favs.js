@@ -37,6 +37,18 @@ router.delete('/fav-artist', function(req, res){
 })
 
 
+router.delete('/fav-tracks', function(req, res){ 
+	 db.userTrack.destroy({
+	 	where: {
+	 		userId: req.user.id,
+	 		trackId: +req.body.trackId
+	 	}
+	 })
+	 .then(function(data){
+	 	res.redirect('/favs/fav-tracks')
+	 })
+})
+
 router.put('/fav-artist/:id', function(req, res) {
     models.User
         .update({
